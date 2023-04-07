@@ -4,8 +4,6 @@
   
   ### *The Crypto Clipboard Guard*
   
-  ![Plipper logo](https://i.imgur.com/AvvbdRL.png)
-  
 </div>
 
 ---
